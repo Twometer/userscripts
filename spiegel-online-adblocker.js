@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Twometer Spiegel Deblock
-// @version      0.2
-// @description  Spiegel Online Ad Blocker Blocker Blocker
+// @name         Twometer Spiegel & Chip Deblock
+// @version      0.3
+// @description  Spiegel Online & Chip Ad Blocker Blocker Blocker
 // @author       Twometer Applications
 // @match        *://*/*
 // @grant        none
@@ -14,27 +14,27 @@
     var oldStyle2;
     var detected = false;
 
-        let intervalId = setInterval(() => {
-            if(window.uabpFlags) {
-                if(!detected) {
-                    console.log("[UABP DEBLOCK] Detected ad block detector");
-                    detected = true;
-                }
-                let elem = document.getElementById("home") || document.getElementsByTagName("BODY")[0];
-                let htmlElem = document.documentElement;
-                if(elem.style["overflow-y"] == "hidden") {
-                    elem.style = oldStyle;
-                    htmlElem.style = oldStyle2;
-                    destroyHtmlElements();
-                    console.log("[UABP DEBLOCK] Destroyed annoying overlay");
-                    clearInterval(intervalId);
-                    console.log("[UABP DEBLOCK] Detached from website");
-                }else {
-                    oldStyle2 = htmlElem.style;
-                    oldStyle = elem.style;
-                }
+    let intervalId = setInterval(() => {
+        if(window.uabpFlags || document.location.href.startsWith("http://www.chip.de")) {
+            if(!detected) {
+                console.log("[UABP DEBLOCK] Detected ad block detector");
+                detected = true;
             }
-        }, 1);
+            let elem = document.getElementById("home") || document.getElementsByTagName("BODY")[0];
+            let htmlElem = document.documentElement;
+            if(elem.style["overflow-y"] == "hidden") {
+                elem.style = oldStyle;
+                htmlElem.style = oldStyle2;
+                destroyHtmlElements();
+                console.log("[UABP DEBLOCK] Destroyed annoying overlay");
+                clearInterval(intervalId);
+                console.log("[UABP DEBLOCK] Detached from website");
+            }else {
+                oldStyle2 = htmlElem.style;
+                oldStyle = elem.style;
+            }
+        }
+    }, 1);
 
 
 
@@ -46,7 +46,7 @@
     function deleteElementByClassName(cname) {
         let elem = document.getElementsByTagName("*");
         for(let i = 0; i < elem.length; i++) {
-            if(elem[i].className.startsWith(cname)) {
+            if(elem[i].className.startsWith && elem[i].className.startsWith(cname)) {
                 deleteElement(elem[i]);
                 return;
             }
