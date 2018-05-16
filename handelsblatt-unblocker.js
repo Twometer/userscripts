@@ -1,5 +1,6 @@
 // ==UserScript==
 // @name         Handelsblatt AdBlock unblocker
+// @run-at document-start
 // @version      0.1
 // @description  Handelsblatt AdBlock unblocker
 // @author       Twometer
