@@ -1,9 +1,10 @@
 // ==UserScript==
-// @name         Twometer Spiegel & Chip Deblock
-// @version      0.3
+// @name         Spiegel & Chip Deblock
+// @version      0.4
 // @description  Spiegel Online & Chip Ad Blocker Blocker Blocker
-// @author       Twometer Applications
-// @match        *://*/*
+// @author       Twometer, Daniel Lerch
+// @include      http://www.spiegel.de/*
+// @include      https://www.chip.de/*
 // @grant        none
 // ==/UserScript==
 
@@ -15,7 +16,7 @@
     var detected = false;
 
     let intervalId = setInterval(() => {
-        if(window.uabpFlags || document.location.href.startsWith("http://www.chip.de")) {
+        if(window.uabpFlags || document.location.href.startsWith("https://www.chip.de")) {
             if(!detected) {
                 console.log("[UABP DEBLOCK] Detected ad block detector");
                 detected = true;
